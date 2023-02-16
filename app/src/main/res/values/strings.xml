@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">CRUD_WithRecycler</string>
+    <string name="deleteUpdate">Update or Delete</string>
+    <string name="message">Select Upadate to cahnge the data    Select delete to remove the data.</string>
+    <string name="cancel">Cancel</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="enterName">Enter Name!</string>
+    <string name="addItem">Add Item</string>
+</resources>
