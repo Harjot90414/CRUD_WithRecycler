@@ -24,40 +24,37 @@ class MainActivity : AppCompatActivity(),RecyclerInterface {
         binding.rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rv.adapter=adapter
 
+
+
+
         binding.btnFab.setOnClickListener {
             var dialog= Dialog(this)
-            var dialogBinding=FabBtnDialogBinding.inflate(layoutInflater)
+            var dialogBinding=BtnNegativeDialogBinding.inflate(layoutInflater)
             dialog.setContentView(dialogBinding.root)
             dialog.window?.setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
             )
-            dialogBinding.btnAdd1.setOnClickListener {
-                if(dialogBinding.etItemName.text.toString().trim().isNullOrEmpty()){
-                    dialogBinding.etItemName.error= "Enter Name!"
-                }
-                else{
-                    arrayList.add(UserModel(dialogBinding.etItemName.text.toString()))
 
-                    dialog.dismiss()
-                    adapter.notifyDataSetChanged()
-                }
+                dialogBinding.btnDelete1.visibility = false
+
+                dialogBinding.btnUpdate.setOnClickListener {
+                    if (dialogBinding.etItemName.text.toString().trim().isNullOrEmpty()) {
+                        dialogBinding.etItemName.error = "Enter Name!"
+                    } else {
+                        arrayList.add(UserModel(dialogBinding.etItemName.text.toString()))
+
+                        dialog.dismiss()
+                        adapter.notifyDataSetChanged()
+                    }
+
             }
             dialog.show()
         }
 
     }
     override fun click(position: Int) {
-        var alertDialog=AlertDialog.Builder(this)
-        alertDialog.setTitle(resources.getString(R.string.deleteUpdate))
-        alertDialog.setMessage(resources.getString(R.string.message))
-        alertDialog.setCancelable(false)
-
-        alertDialog.setNeutralButton(resources.getString(R.string.cancel)){_,_->
-            alertDialog.setCancelable(true)
-        }
-        alertDialog.setNegativeButton(resources.getString(R.string.update)){_,_->
-            var dialog=Dialog(this)
+        var dialog=Dialog(this)
             var dialogBinding=BtnNegativeDialogBinding.inflate(layoutInflater)
             dialog.setContentView(dialogBinding.root)
             dialog.window?.setLayout(
@@ -66,21 +63,29 @@ class MainActivity : AppCompatActivity(),RecyclerInterface {
             )
 
             dialogBinding.btnUpdate.setOnClickListener {
-                if (dialogBinding.etItemName.text.toString().trim().isNullOrEmpty()){
-                    dialogBinding.etItemName.error="Enter Name"
-                }
-                else{
-                    arrayList[position]= UserModel(dialogBinding.etItemName.text.toString())
+                if (dialogBinding.etItemName.text.toString().trim().isNullOrEmpty()) {
+                    dialogBinding.etItemName.error = "Enter Name"
+                } else {
+                    arrayList[position] = UserModel(dialogBinding.etItemName.text.toString())
                     adapter.notifyDataSetChanged()
                     dialog.dismiss()
                 }
             }
-            dialog.show()
-        }
-        alertDialog.setPositiveButton(resources.getString(R.string.delete)){_,_->
+        dialogBinding.btnDelete1.setOnClickListener {
             arrayList.removeAt(position)
             adapter.notifyDataSetChanged()
+            dialog.dismiss()
         }
-        alertDialog.show()
+        dialog.show()
+
+    }
+    fun isClicked(){
+        var dialog=Dialog(this)
+        var dialogBinding=BtnNegativeDialogBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
     }
 }
