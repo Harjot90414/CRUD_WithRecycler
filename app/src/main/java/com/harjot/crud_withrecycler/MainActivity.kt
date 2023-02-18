@@ -24,68 +24,48 @@ class MainActivity : AppCompatActivity(),RecyclerInterface {
         binding.rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rv.adapter=adapter
 
-
-
-
         binding.btnFab.setOnClickListener {
-            var dialog= Dialog(this)
-            var dialogBinding=BtnNegativeDialogBinding.inflate(layoutInflater)
-            dialog.setContentView(dialogBinding.root)
-            dialog.window?.setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
-            )
-
-                dialogBinding.btnDelete1.visibility = false
-
-                dialogBinding.btnUpdate.setOnClickListener {
-                    if (dialogBinding.etItemName.text.toString().trim().isNullOrEmpty()) {
-                        dialogBinding.etItemName.error = "Enter Name!"
-                    } else {
-                        arrayList.add(UserModel(dialogBinding.etItemName.text.toString()))
-
-                        dialog.dismiss()
-                        adapter.notifyDataSetChanged()
-                    }
-
-            }
-            dialog.show()
+            showDialog()
         }
 
     }
     override fun click(position: Int) {
+        showDialog(position)
+    }
+    fun showDialog(position: Int = -1){
         var dialog=Dialog(this)
-            var dialogBinding=BtnNegativeDialogBinding.inflate(layoutInflater)
-            dialog.setContentView(dialogBinding.root)
-            dialog.window?.setLayout(
-                WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.WRAP_CONTENT
-            )
+        var dialogBinding=BtnNegativeDialogBinding.inflate(layoutInflater)
+        dialog.setContentView(dialogBinding.root)
+        if(position>-1){
+            dialogBinding.btnDelete1.visibility = View.GONE
+            dialogBinding.btnUpdate.setText("Add")
+        }else{
+            dialogBinding.btnUpdate.setText("Update")
 
-            dialogBinding.btnUpdate.setOnClickListener {
-                if (dialogBinding.etItemName.text.toString().trim().isNullOrEmpty()) {
-                    dialogBinding.etItemName.error = "Enter Name"
-                } else {
+        }
+        dialog.window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
+        dialogBinding.btnUpdate.setOnClickListener {
+            if (dialogBinding.etItemName.text.toString().trim().isNullOrEmpty()) {
+                dialogBinding.etItemName.error = "Enter Name"
+            } else {
+                if(position>-1)
                     arrayList[position] = UserModel(dialogBinding.etItemName.text.toString())
-                    adapter.notifyDataSetChanged()
-                    dialog.dismiss()
+                else{
+                    arrayList.add( UserModel(dialogBinding.etItemName.text.toString()))
                 }
+                adapter.notifyDataSetChanged()
+                dialog.dismiss()
             }
+        }
         dialogBinding.btnDelete1.setOnClickListener {
             arrayList.removeAt(position)
             adapter.notifyDataSetChanged()
             dialog.dismiss()
         }
         dialog.show()
-
-    }
-    fun isClicked(){
-        var dialog=Dialog(this)
-        var dialogBinding=BtnNegativeDialogBinding.inflate(layoutInflater)
-        dialog.setContentView(dialogBinding.root)
-        dialog.window?.setLayout(
-            WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
     }
 }
