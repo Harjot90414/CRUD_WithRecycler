@@ -63,16 +63,27 @@ class MainActivity : AppCompatActivity() ,RecyclerInterface {
              else if(dialogBinding.etAddress.text.toString().trim().isNullOrEmpty()){
                  dialogBinding.etAddress.error="Enter Address"
              }
+             else if(dialogBinding.etPhonNo.length()<10){
+                 dialogBinding.etPhonNo.error="Invalid Phone No."
+             }
              else if(dialogBinding.etPhonNo.text.toString().trim().isNullOrEmpty()){
                  dialogBinding.etPhonNo.error="Enter PhoneNo"
              }
              else {
                  if(position>-1) {
-                     arrayList[position] = UserModel(dialogBinding.etItemName.text.toString(),dialogBinding.etAddress.text.toString(),dialogBinding.etPhonNo.text.toString())
+                     arrayList[position] = UserModel(
+                         dialogBinding.etItemName.text.toString(),
+                         dialogBinding.etAddress.text.toString(),
+                         dialogBinding.etPhonNo.text.toString()
+                     )
                  }
                  else{
                      showList.clear()
-                     arrayList.add(UserModel(dialogBinding.etItemName.text.toString(),dialogBinding.etAddress.text.toString(),dialogBinding.etPhonNo.text.toString()))
+                     arrayList.add(UserModel(
+                         dialogBinding.etItemName.text.toString(),
+                         dialogBinding.etAddress.text.toString(),
+                         dialogBinding.etPhonNo.text.toString()
+                     ))
                      showList.addAll(arrayList)
                  }
                  adapter.notifyDataSetChanged()
