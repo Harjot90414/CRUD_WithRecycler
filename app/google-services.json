@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "418795737640",
+    "project_id": "fir-crud-3685d",
+    "storage_bucket": "fir-crud-3685d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418795737640:android:3fb5aa3d876b30dcba9b1d",
+        "android_client_info": {
+          "package_name": "com.harjot.crud_withrecycler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418795737640-b7pjgjh5h551pebq2v99l68u0u3s6thd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcpLQI4MphA1OSRCwm30FKxu-eU5NU67U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418795737640-b7pjgjh5h551pebq2v99l68u0u3s6thd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

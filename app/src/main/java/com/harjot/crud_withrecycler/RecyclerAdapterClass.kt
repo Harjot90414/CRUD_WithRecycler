@@ -17,8 +17,8 @@ class RecyclerAdapterClass(var array: ArrayList<UserModel>, var recyclerInterfac
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler,parent,false)
-        return ViewHolder(view)
+        var initview = LayoutInflater.from(parent.context).inflate(R.layout.item_recycler,parent,false)
+        return ViewHolder(initview)
     }
 
     override fun getItemCount(): Int {
